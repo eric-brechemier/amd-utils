@@ -18,6 +18,8 @@ Fill in missing properties in object with values from the *defaults* objects.
 PS: it allows merging multiple objects at once, the first ones will take
 precedence.
 
+See: [`mixIn()`](#mixIn), [`merge()`](#merge)
+
 
 
 ## forOwn(obj, callback[, thisObj])
@@ -157,6 +159,22 @@ keys(obj); // ['foo', 'bar', 'lorem']
 
 
 
+## merge(target, ...objects):Object
+
+Deep merges objects.
+
+```js
+var obj1 = {a: {b: 1, c: 1, d: {e: 1, f: 1}}};
+var obj2 = {a: {b: 2, d : {f : 'yeah'} }};
+
+merge(obj1, obj2); // {a: {b : 2, c : 1, d : {e : 1, f : 'yeah'}}}
+```
+
+See: [`fillIn()`](#fillIn), [`mixIn()`](#mixIn)
+
+
+
+
 ## mixIn(target, ...objects):Object
 
 Combine properties from all the objects into first one.
@@ -181,6 +199,9 @@ console.log(a);  // {foo: "bar"}
 mixIn(a, b);     // {foo: "bar", lorem: 123}
 console.log(a);  // {foo: "bar", lorem: 123}
 ```
+
+See: [`fillIn()`](#fillIn), [`merge()`](#merge)
+
 
 
 
