@@ -190,9 +190,11 @@ var obj = {
 keys(obj); // ['foo', 'bar', 'lorem']
 </pre>
 
-<h2>merge(target, ...objects):Object <a href="#merge" id="merge" class="deep-link">#</a></h2>
+<h2>merge(...objects):Object <a href="#merge" id="merge" class="deep-link">#</a></h2>
 
-<p>Deep merges objects.</p>
+<p>Deep merges objects. Note that objects and properties will be cloned during the
+process to avoid undesired side effects. It return a new object and won't
+affect source objects.</p>
 
 <pre class="brush:js">
 

@@ -159,9 +159,11 @@ keys(obj); // ['foo', 'bar', 'lorem']
 
 
 
-## merge(target, ...objects):Object
+## merge(...objects):Object
 
-Deep merges objects.
+Deep merges objects. Note that objects and properties will be cloned during the
+process to avoid undesired side effects. It return a new object and won't
+affect source objects.
 
 ```js
 var obj1 = {a: {b: 1, c: 1, d: {e: 1, f: 1}}};

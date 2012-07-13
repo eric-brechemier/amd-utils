@@ -1,12 +1,16 @@
-define(['./hasOwn', '../lang/isObject'], function (hasOwn, isObject) {
+define(['./hasOwn', '../lang/clone', '../lang/isObject'], function (hasOwn, clone, isObject) {
 
     /**
      * Deep merge objects.
-     * @version 0.1.0 (2012/05/24)
+     * @version 0.2.0 (2012/07/13)
      */
-    function merge(target) {
+    function merge() {
         var i = 1,
-            key, val, obj;
+            key, val, obj, target;
+
+        // make sure we don't modify source element and it's properties
+        // objects are passed by reference
+        target = clone( arguments[0] );
 
         while (obj = arguments[i++]) {
             for (key in obj) {
@@ -16,15 +20,12 @@ define(['./hasOwn', '../lang/isObject'], function (hasOwn, isObject) {
 
                 val = obj[key];
 
-                if ( isObject(val) ) {
-                    if ( isObject(target[key]) ) {
-                        // inception
-                        merge(target[key], val);
-                    } else {
-                        target[key] = val;
-                    }
+                if ( isObject(val) && isObject(target[key]) ){
+                    // inception, deep merge objects
+                    target[key] = merge(target[key], val);
                 } else {
-                    target[key] = val;
+                    // make sure arrays, regexp, date, objects are cloned
+                    target[key] = clone(val);
                 }
 
             }
